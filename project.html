@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .calculator {
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .calculator h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #764ba2;
+      outline: none;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .buttons button {
+      flex: 1 1 45%;
+      min-width: 100px;
+      padding: 12px;
+      font-size: 18px;
+      background: #764ba2;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .buttons button:hover {
+      background: #5a3e91;
+      transform: scale(1.05);
+    }
+
+    .result {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      min-height: 40px;
+    }
+
+    @media (max-width: 400px) {
+      .buttons button {
+        font-size: 16px;
+        padding: 10px;
+        min-width: 90px;
+      }
+
+      .calculator h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <h2>Basic Calculator</h2>
+
+    <input type="number" id="num1" placeholder="Enter first number" />
+    <input type="number" id="num2" placeholder="Enter second number" />
+
+    <div class="buttons">
+      <button onclick="calculate('add')">+ Add</button>
+      <button onclick="calculate('subtract')">− Subtract</button>
+      <button onclick="calculate('multiply')">× Multiply</button>
+      <button onclick="calculate('divide')">÷ Divide</button>
+    </div>
+
+    <div class="result" id="result">Result: </div>
+  </div>
+
+  <script>
+    function calculate(operation) {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const resultBox = document.getElementById("result");
+      let resultText = '';
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultText = "Please enter valid numbers.";
+      } else {
+        switch (operation) {
+          case "add":
+            resultText = num1 + num2;
+            break;
+          case "subtract":
+            resultText = num1 - num2;
+            break;
+          case "multiply":
+            resultText = num1 * num2;
+            break;
+          case "divide":
+            resultText = num2 !== 0 ? num1 / num2 : "Cannot divide by zero!";
+            break;
+          default:
+            resultText = "Unknown operation.";
+        }
+      }
+
+      resultBox.textContent = "Result: " + resultText;
+    }
+  </script>
+
+</body>
+</html>
